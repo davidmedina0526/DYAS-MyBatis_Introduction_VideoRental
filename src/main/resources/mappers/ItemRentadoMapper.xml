@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ClienteMapper">
+<mapper namespace="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ItemRentadoMapper">
 
-  <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
+    <select parameterType="map" id="consultarItemRentado" resultMap="ItemRentadoResult">
     select
       c.nombre as c_nombre,
       c.documento as c_documento,
@@ -33,13 +33,9 @@
       left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id;
   </select>
 
-  <resultMap id="ClienteResult" type="edu.unisabana.dyas.samples.entities.Cliente">
-      <id property="documento" column="c_documento"/>
-      <result property="nombre" column="c_nombre"/>
-      <result property="telefono" column="c_telefono"/>  
-      <result property="direccion" column="c_direccion"/>   
-      <result property="email" column="c_email"/>
-      <result property="vetado" column="c_vetado"/>
-      <collection property="rentados" ofType="edu.unisabana.dyas.samples.entities.ItemRentado" resultMap="ItemRentadoResult" columnPrefix="ir_"/>
+  <resultMap id="ItemRentadoResult" type="edu.unisabana.dyas.samples.entities.ItemRentado">
+      <result property="fechainiciorenta" column="ir_fechainiciorenta"/>
+      <result property="fechafinrenta" column="ir_fechafinrenta"/>
+      <association property="item" javaType="edu.unisabana.dyas.samples.entities.Item" resultMap="ItemResult" columnPrefix="i_"/>
   </resultMap>
 </mapper>

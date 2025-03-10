@@ -1,12 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.TipoItemMapper">
-
-  <select parameterType="map" id="consultarTipoItem" resultMap="TipoItemResult">
-    select
+select
       c.nombre as c_nombre,
       c.documento as c_documento,
       c.telefono as c_telefono,
@@ -31,10 +23,3 @@
       left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
       left join VI_ITEMS as i on ir.ITEMS_id=i.id 
       left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id;
-  </select>
-
-  <resultMap id="TipoItemResult" type="edu.unisabana.dyas.samples.entities.TipoItem">
-      <id property="id" column="ti_id"/>
-      <result property="descripcion" column="ti_descripcion"/>
-  </resultMap>
-</mapper>
