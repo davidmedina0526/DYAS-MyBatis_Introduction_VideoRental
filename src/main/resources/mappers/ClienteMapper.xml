@@ -8,38 +8,36 @@
   <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
     select
       c.nombre as c_nombre,
-      c.documento as c_documento,
-      c.telefono as c_telefono,
-      c.direccion as c_direccion,
-      c.email as c_email,
-      c.vetado as c_vetado,
-      ir.CLIENTES_documento as ir_clientes_documento,
-      ir.ITEMS_id as ir_items_id,
-      ir.fechainiciorenta as ir_fechainiciorenta,
-      ir.fechafinrenta as ir_fechafinrenta,
-      i.id as i_id,
-      i.nombre as i_nombre,
-      i.descripcion as i_descripcion,
-      i.fechalanzamiento as i_fechalanzamiento,
-      i.tarifaxdia as i_tarifaxdia,
-      i.formatorenta as i_formatorenta,
-      i.genero as i_genero,
-      i.TIPOITEM_id as i_tipoitem_id,
-      ti.id as ti_id,
-      ti.descripcion as ti_descripcion
+      c.documento,
+      c.telefono,
+      c.direccion,
+      c.email,
+      c.vetado,
+      ir.ITEMS_id,
+      ir.fechainiciorenta ,
+      ir.fechafinrenta ,
+      i.id ,
+      i.nombre ,
+      i.descripcion ,
+      i.fechalanzamiento ,
+      i.tarifaxdia ,
+      i.formatorenta ,
+      i.genero ,        
+      ti.id ,
+      ti.descripcion 
       FROM VI_CLIENTES as c 
       left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
       left join VI_ITEMS as i on ir.ITEMS_id=i.id 
       left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id;
   </select>
 
-  <resultMap id="ClienteResult" type="edu.unisabana.dyas.samples.entities.Cliente">
-      <id property="documento" column="c_documento"/>
+  <resultMap type="Cliente" id="ClienteResult">
+      <id property="documento" column="documento"/>
       <result property="nombre" column="c_nombre"/>
-      <result property="telefono" column="c_telefono"/>  
-      <result property="direccion" column="c_direccion"/>   
-      <result property="email" column="c_email"/>
-      <result property="vetado" column="c_vetado"/>
-      <collection property="rentados" ofType="edu.unisabana.dyas.samples.entities.ItemRentado" resultMap="ItemRentadoResult" columnPrefix="ir_"/>
+      <result property="telefono" column="telefono"/>  
+      <result property="direccion" column="direccion"/>   
+      <result property="email" column="email"/>
+      <result property="vetado" column="vetado"/>
+      <collection property="rentados" ofType="ItemRentado" resultMap="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult"/>
   </resultMap>
 </mapper>
