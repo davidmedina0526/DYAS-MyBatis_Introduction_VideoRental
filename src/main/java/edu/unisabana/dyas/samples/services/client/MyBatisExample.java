@@ -27,7 +27,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
+import edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.TipoItemMapper;
 
 /**
  *
@@ -66,14 +69,14 @@ public class MyBatisExample {
         //Crear el mapper y usarlo:
         try (SqlSession sqlss = sessionfact.openSession()) {
            
-            /* ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
-            System.out.println(cm.consultarClientes()); */
+            ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
+            System.out.println(cm.consultarClientes());
             
-            /* ItemMapper im=sqlss.getMapper(ItemMapper.class);
-            System.out.println(im.consultarItems()); */
+            ItemMapper im=sqlss.getMapper(ItemMapper.class);
+            System.out.println(im.consultarItems());
 
-            /* TipoItemMapper tim=sqlss.getMapper(TipoItemMapper.class);
-            System.out.println(tim.consultarTipoItem()); */
+            TipoItemMapper tim=sqlss.getMapper(TipoItemMapper.class);
+            System.out.println(tim.consultarTipoItem());
 
             ItemRentadoMapper irm=sqlss.getMapper(ItemRentadoMapper.class);
             System.out.println(irm.consultarItemRentado());
