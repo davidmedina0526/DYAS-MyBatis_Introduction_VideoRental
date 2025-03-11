@@ -66,8 +66,8 @@ public class Item implements Serializable{
         return descripcion;
     }
 
-    public void setDescrpcion(String descrpcion) {
-        this.descripcion = descrpcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getFechaLanzamiento() {

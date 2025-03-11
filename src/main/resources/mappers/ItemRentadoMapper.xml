@@ -17,8 +17,8 @@
       ir.fechainiciorenta ,
       ir.fechafinrenta ,
       i.id ,
-      i.nombre ,
-      i.descripcion ,
+      i.nombre as i_nombre,
+      i.descripcion as i_descripcion,
       i.fechalanzamiento ,
       i.tarifaxdia ,
       i.formatorenta ,
@@ -32,6 +32,7 @@
   </select>
 
   <resultMap id="ItemRentadoResult" type="edu.unisabana.dyas.samples.entities.ItemRentado">
+      <id property="id" column="ITEMS_id"/>
       <result property="fechainiciorenta" column="fechainiciorenta"/>
       <result property="fechafinrenta" column="fechafinrenta"/>
       <association property="item" javaType="edu.unisabana.dyas.samples.entities.Item" resultMap="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult"/>
