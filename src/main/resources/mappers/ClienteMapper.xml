@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ClienteMapper">
 
+  <!-- Consulta todos los clientes (ya existente) -->
   <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
     select
       c.nombre as c_nombre,
@@ -14,23 +15,58 @@
       c.email,
       c.vetado,
       ir.ITEMS_id,
-      ir.fechainiciorenta ,
-      ir.fechafinrenta ,
-      i.id ,
-      i.nombre ,
-      i.descripcion ,
-      i.fechalanzamiento ,
-      i.tarifaxdia ,
-      i.formatorenta ,
-      i.genero ,        
-      ti.id ,
+      ir.fechainiciorenta,
+      ir.fechafinrenta,
+      i.id,
+      i.nombre,
+      i.descripcion,
+      i.fechalanzamiento,
+      i.tarifaxdia,
+      i.formatorenta,
+      i.genero,
+      ti.id,
       ti.descripcion 
-      FROM VI_CLIENTES as c 
-      left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
-      left join VI_ITEMS as i on ir.ITEMS_id=i.id 
-      left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id;
+    FROM VI_CLIENTES as c 
+    left join VI_ITEMRENTADO as ir on c.documento = ir.CLIENTES_documento 
+    left join VI_ITEMS as i on ir.ITEMS_id = i.id 
+    left join VI_TIPOITEM as ti on i.TIPOITEM_id = ti.id
   </select>
+  
+  <!-- Nuevo: consulta un cliente por su id (documento) -->
+  <select parameterType="map" id="consultarCliente" resultMap="ClienteResult">
+    select
+      c.nombre as c_nombre,
+      c.documento,
+      c.telefono,
+      c.direccion,
+      c.email,
+      c.vetado,
+      ir.ITEMS_id,
+      ir.fechainiciorenta,
+      ir.fechafinrenta,
+      i.id,
+      i.nombre,
+      i.descripcion,
+      i.fechalanzamiento,
+      i.tarifaxdia,
+      i.formatorenta,
+      i.genero,
+      ti.id,
+      ti.descripcion 
+    FROM VI_CLIENTES as c 
+    left join VI_ITEMRENTADO as ir on c.documento = ir.CLIENTES_documento 
+    left join VI_ITEMS as i on ir.ITEMS_id = i.id 
+    left join VI_TIPOITEM as ti on i.TIPOITEM_id = ti.id
+    WHERE c.documento = #{idcli}
+  </select>
+  
+  <!-- Nuevo: inserta un item rentado para el cliente -->
+  <insert id="agregarItemRentadoACliente" parameterType="map">
+    INSERT INTO VI_ITEMRENTADO (CLIENTES_documento, ITEMS_id, fechainiciorenta, fechafinrenta)
+    VALUES (#{idcli}, #{idit}, #{fechainicio}, #{fechafin})
+  </insert>
 
+  <!-- resultMap para Cliente -->
   <resultMap type="Cliente" id="ClienteResult">
       <id property="documento" column="documento"/>
       <result property="nombre" column="c_nombre"/>
@@ -38,6 +74,10 @@
       <result property="direccion" column="direccion"/>   
       <result property="email" column="email"/>
       <result property="vetado" column="vetado"/>
-      <collection property="rentados" ofType="ItemRentado" resultMap="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult"/>
+      <!-- Se asume que la colección 'rentados' en la entidad Cliente corresponde a los items rentados -->
+      <collection property="rentados" 
+                  ofType="edu.unisabana.dyas.samples.entities.ItemRentado" 
+                  resultMap="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult"/>
   </resultMap>
+  
 </mapper>
