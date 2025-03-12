@@ -54,6 +54,8 @@ public class Item implements Serializable{
         this.id = id;
     }
 
+
+
     public String getNombre() {
         return nombre;
     }
@@ -66,8 +68,8 @@ public class Item implements Serializable{
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescrpcion(String descrpcion) {
+        this.descripcion = descrpcion;
     }
 
     public String getFechaLanzamiento() {
@@ -105,7 +107,7 @@ public class Item implements Serializable{
     @Override
     public String toString() {
         return "Item{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fechaLanzamiento=" + fechaLanzamiento + ", tarifaxDia=" + tarifaxDia + ", formatoRenta=" + formatoRenta + ", genero=" + genero + '}';
-    }
+}
 
 
     
