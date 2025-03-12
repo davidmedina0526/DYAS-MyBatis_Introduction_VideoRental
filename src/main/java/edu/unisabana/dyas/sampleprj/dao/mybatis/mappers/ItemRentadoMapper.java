@@ -10,7 +10,10 @@ public interface ItemRentadoMapper {
     
     public List<ItemRentado> consultarItemRentado();
     
-    public ItemRentado consultarItemRentado(@Param("id") int id);
+    public void agregarItemRentadoACliente(@Param("idcli")int id, 
+    @Param("idit")int idit, 
+    @Param("fechainicio")String fechainicio,
+    @Param("fechafin")String fechafin);
     
     public void insertarItemRentado(@Param("itemRentado") ItemRentado itemRentado);
 }

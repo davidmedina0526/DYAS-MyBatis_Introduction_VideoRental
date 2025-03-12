@@ -29,12 +29,17 @@
       left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
       left join VI_ITEMS as i on ir.ITEMS_id=i.id 
       left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id;
-  </select>
+    </select>
 
-  <resultMap id="ItemRentadoResult" type="edu.unisabana.dyas.samples.entities.ItemRentado">
-      <id property="id" column="ITEMS_id"/>
-      <result property="fechainiciorenta" column="fechainiciorenta"/>
-      <result property="fechafinrenta" column="fechafinrenta"/>
-      <association property="item" javaType="edu.unisabana.dyas.samples.entities.Item" resultMap="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult"/>
-  </resultMap>
+   <insert id="agregarItemRentadoACliente" parameterType="map">
+        INSERT INTO VI_ITEMRENTADO (CLIENTES_documento,  ITEMS_id, fechainiciorenta, fechafinrenta)
+        VALUES (#{idcli}, #{idit}, #{fechainicio}, #{fechafin});
+    </insert>
+
+    <resultMap id="ItemRentadoResult" type="edu.unisabana.dyas.samples.entities.ItemRentado">
+        <id property="id" column="ITEMS_id"/>
+        <result property="fechainiciorenta" column="fechainiciorenta"/>
+        <result property="fechafinrenta" column="fechafinrenta"/>
+        <association property="item" javaType="edu.unisabana.dyas.samples.entities.Item" resultMap="edu.unisabana.dyas.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult"/>
+    </resultMap>
 </mapper>
